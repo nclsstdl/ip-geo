@@ -1,15 +1,13 @@
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
+    <>
+      <header className="bg-green-500 shadow-md grid place-items-center font-bold text-3xl text-green-50 tracking-tighter">
+        Ip Geo Lookup
       </header>
-    </div>
+      <main>lorem</main>
+
+      <footer className="bg-green-100"></footer>
+    </>
   );
 }
 
