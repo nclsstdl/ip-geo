@@ -1,14 +1,20 @@
-import express, { type Request, type Response } from "express";
 import dotenv from "dotenv";
+import express, { type Request, type Response } from "express";
+import { GeoInformationController } from "./geo-information/controllers/geo-information.controller";
+import { GeoInformationService } from "./geo-information/services/geo-information.service";
+import { validateIpAddress } from "./geo-information/validators/ip-address.validator";
+import { IpApiService } from "./ip-api/services/ip-api.service";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+const geoInformationController = new GeoInformationController(new GeoInformationService(new IpApiService()));
+
+app.get("/ip/:ip/geo", validateIpAddress, (req: Request, res: Response) =>
+  geoInformationController.getGeoInformationByIp(req, res)
+);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
