@@ -18,9 +18,19 @@ export class IpApiService implements IpApi {
   private static mapIpApiSuccessResponseToGeoInformationResponse(
     response: IpApiSuccessResponse
   ): GeoInformationResponse {
-    const { country, countryCode, region, regionName, city, zip, lat, lon } = response;
+    const { query, country, countryCode, region, regionName, city, zip, lat, lon } = response;
 
-    return { country, countryCode, region, regionName, city, zip, lat, lon } satisfies GeoInformationResponse;
+    return {
+      ip: query,
+      country,
+      countryCode,
+      region,
+      regionName,
+      city,
+      zip,
+      lat,
+      lon,
+    } satisfies GeoInformationResponse;
   }
 
   public getGeoInformationByIp(ip: string): Promise<GeoInformationResponse> {

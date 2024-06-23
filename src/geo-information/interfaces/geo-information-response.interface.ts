@@ -1,4 +1,5 @@
 export interface GeoInformationResponse {
+  ip: string;
   country: string;
   countryCode: string;
   region: string;
