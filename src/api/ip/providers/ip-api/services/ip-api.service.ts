@@ -1,11 +1,11 @@
 import axios from "axios";
 import { IpApiResponse, IpApiSuccessResponse } from "../interfaces/ip-api-response.interface";
-import { IpApi } from "../../geo-information/interfaces/ip-api.interface";
-import { GeoInformationResponse } from "../../geo-information/interfaces/geo-information-response.interface";
+import { IpApi } from "../../../interfaces/ip-api.interface";
+import { GeoInformationResponse } from "../../../interfaces/geo-information-response.interface";
 import { IpApiResponseStatus } from "../enums/ip-api-response-status.enum";
 
 export class IpApiService implements IpApi {
-  private apiUrl = process.env.IP_API_URL;
+  private static apiUrl = "http://ip-api.com/json";
 
   private static mapIpApiResponseToGeoInformationResponse(response: IpApiResponse): GeoInformationResponse {
     if (response.status === IpApiResponseStatus.FAIL) {
@@ -35,7 +35,7 @@ export class IpApiService implements IpApi {
 
   public getGeoInformationByIp(ip: string): Promise<GeoInformationResponse> {
     return axios
-      .get<IpApiResponse>(`${this.apiUrl}/${ip}`)
+      .get<IpApiResponse>(`${IpApiService.apiUrl}/${ip}`)
       .then((response) => IpApiService.mapIpApiResponseToGeoInformationResponse(response.data));
   }
 }
