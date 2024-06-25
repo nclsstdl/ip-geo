@@ -16,7 +16,7 @@ class IpController {
 
       res.send(geoInformation);
     } catch (error) {
-      res.status(HttpStatusCode.BadRequest).json(error);
+      res.status(HttpStatusCode.BadRequest).json(`Geo-Informationen konnten nicht ermittelt werden! (${error})`);
     }
   };
 }
